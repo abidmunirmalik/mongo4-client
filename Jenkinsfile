@@ -12,10 +12,17 @@ pipeline {
             steps {
                 sh "git --version"
                 sh "docker --version"
-
             }//steps
-
-        }// stage
+         }// stage
+        stage('docker build/push') {
+            steps {
+              script {
+                docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-creds')
+                def image = docker.build("abidmunirmalik/mongo4-client", '.')
+                image.push('latest')
+              } //script
+            }//steps
+         }// stage
 
     } //stages
 }
