@@ -8,5 +8,5 @@ docker build -t mongo4-client .
 
 # Run Container
 ```sh
-docker run -dit --rm --name mongo-client mongo4-client:latest
+docker run --rm -it --name mongo-client mongo4-client:latest /bin/bash
 ```
