@@ -26,7 +26,7 @@ pipeline {
         stage('Build & Push to Artifactory') {
             steps {
              script {
-                docker.withRegistry('docker-artifactory.webassign.net', "$ARTIFACTORY_CREDS") {
+                docker.withRegistry('https://docker-artifactory.webassign.net', "$ARTIFACTORY_CREDS") {
                   docker.build("docker-artifactory.webassign.net/waops/mongo4-client", '.').push('latest') 
                }
              } // script
