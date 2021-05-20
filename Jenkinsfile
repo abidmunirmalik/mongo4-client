@@ -16,9 +16,11 @@ pipeline {
          }// stage
         stage('docker build/push') {
             steps {
+             script {
                 docker.withRegistry('', "$DOCKERHUB_CREDS") {
                   docker.build("abidmunirmalik/mongo4-client", '.').push('latest') 
-                }
+               }
+             } // script
             }//steps
          }// stage
 
