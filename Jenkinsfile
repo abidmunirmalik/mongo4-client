@@ -16,12 +16,9 @@ pipeline {
          }// stage
         stage('docker build/push') {
             steps {
-              script {
-                docker.withDockerRegistry(registry: [credentialsId: "$DOCKERHUB_CREDS"]) {
-                  def image = docker.build("abidmunirmalik/mongo4-client", '.')
-                  image.push('latest')
+                docker.withRegistry('', "$DOCKERHUB_CREDS") {
+                  docker.build("abidmunirmalik/mongo4-client", '.').push('latest') 
                 }
-              } //script
             }//steps
          }// stage
 
