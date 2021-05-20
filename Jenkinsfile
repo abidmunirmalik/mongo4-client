@@ -14,11 +14,20 @@ pipeline {
                 sh "docker --version"
             }//steps
          }// stage
-        stage('docker build/push') {
+        stage('Build & Push to Dockerhub') {
             steps {
              script {
                 docker.withRegistry('', "$DOCKERHUB_CREDS") {
                   docker.build("abidmunirmalik/mongo4-client", '.').push('latest') 
+               }
+             } // script
+            }//steps
+         }// stage
+        stage('Build & Push to Artifactory') {
+            steps {
+             script {
+                docker.withRegistry('', "$ARTIFACTORY_CREDS") {
+                  docker.build("docker-artifactory.webassign.net/waops/mongo4-client", '.').push('latest') 
                }
              } // script
             }//steps
